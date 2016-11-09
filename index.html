@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>emojwe</title>
+<meta name='description' content='Create emojis that incorporate all skin tones ❤️'>
+<meta name='twitter:card' content='summary' />
+<meta name='twitter:site' content='@brensudol' />
+<meta name='twitter:title' content='Emoj-we' />
+<meta name='twitter:description' content='Create emojis that incorporate all skin tones. Together we are better.'>
+<meta name='twitter:image' content='img/misc/boom.png' />
+<link href='css/ace.min.css' rel='stylesheet'>
+<style>
+.container { max-width: 550px; }
+.border { border: 2px solid #00aaff; }
+.bs-dashed { border-style: dashed; }
+.bold-extra { font-weight: 800; }
+.btn-primary { background-color: #00aaff; }
+.blue { color: #00aaff; }
+</style>
+</head>
+<body class='px2 py3 mx-auto container'>
+<header>
+  <h1 class='mt0 mb1 regular'>emoj<span class='bold-extra'>we</span></h1>
+  <p class='m0'>
+    A tool to create emojis that incorporate all skin tones.
+    <br class='xs-hide'>
+    Together we can do great things. ❤️
+  </p>
+  <div class='h1 blue'>〰〰〰</div>
+</header>
+<section class='clearfix mxn2 mt2 mb4'>
+  <div class='col col-6 px2'>
+    <form class='mb3 emoji-options'>
+      <label class='block h6 bold caps label'>Emoji</label>
+      <select class='mb3 block col-12 select select-emoji'>
+        <option value='baby'>👶 Baby</option>
+        <option value='boy'>👦 Boy</option>
+        <option value='girl'>👧 Girl</option>
+        <option value='flexed-biceps'>💪 Flexed biceps</option>
+        <option value='ok-hand-sign'>👌 OK hand sign</option>
+      </select>
+      <label class='block h6 bold caps label'>Platform</label>
+      <select class='mb3 block col-12 select select-platform'>
+        <option value='apple'>Apple</option>
+        <option value='google' selected>Google</option>
+        <option value='facebook'>Facebook</option>
+        <option value='twitter'>Twitter</option>
+      </select>
+    </form>
+    <div class='mb3'>
+      <button class='btn btn-primary make-gif'>Download GIF</button>
+      <div class='h6 gif-pct-done'></div>
+    </div>
+  </div>
+  <div class='col col-6 px2'>
+    <div class='h6 bold caps label'>Preview</div>
+    <canvas class='col-12 p2 border-box border bs-dashed rounded canvas' width='100' height='100'></canvas>
+  </div>
+</section>
+<section>
+  <h3 class='mt4 mb2'>Examples</h3>
+  <div class='mb3 clearfix mxn1'>
+    <div class='col col-4 px1 mb1'>
+      <img class='border rounded' src='img/misc/peace.gif'>
+    </div>
+    <div class='col col-4 px1 mb1'>
+      <img class='border rounded' src='img/misc/peace.gif'>
+    </div>
+    <div class='col col-4 px1 mb1'>
+      <img class='border rounded' src='img/misc/peace.gif'>
+    </div>
+    <div class='col col-4 px1 mb1'>
+      <img class='border rounded' src='img/misc/peace.gif'>
+    </div>
+    <div class='col col-4 px1 mb1'>
+      <img class='border rounded' src='img/misc/peace.gif'>
+    </div>
+    <div class='col col-4 px1 mb1'>
+      <img class='border rounded' src='img/misc/peace.gif'>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class='h1 blue'>〰〰〰</div>
+  <img class='align-middle' src='img/misc/peace.gif' width='24'>
+  <a class='btn px1' href='#'>GitHub</a>
+  <a class='btn px1' href='#'>@brensudol</a>
+</footer>
+<script src='js/vendor/gif.js'></script>
+<script src='js/vendor/file-saver.js'></script>
+<script src='js/main.js'></script>
+</body>
+</html>
