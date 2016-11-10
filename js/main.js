@@ -10,10 +10,10 @@ var imgOrder = ['0', '3', '6', '4', '1-2', '5'];
 var currEmoji = 'baby';
 var currPlatform = 'google';
 
-var gif, gifConfig = {
+var gif, gifBlob, gifConfig = {
   repeat: 0,
   quality: 1,
-  workers: 3,
+  workers: 2,
   workerScript: 'js/vendor/gif.worker.js'
 };
 
@@ -24,12 +24,7 @@ var gifPct = document.querySelector('.gif-pct-done');
 // event handlers
 /////////////////////////////
 gifBtn.addEventListener('click', gifify);
-
-form.addEventListener('change', function(e) {
-  currEmoji = form.querySelector('.select-emoji').value;
-  currPlatform = form.querySelector('.select-platform').value;
-  run(currEmoji, currPlatform);
-})
+form.addEventListener('change', update);
 
 // main & helper methods
 /////////////////////////////
@@ -57,8 +52,11 @@ function reset() {
   count = 0;
   percent = 0;
   finished = false;
+  outIdx = 0;
+  inIdx = 1;
   clearTimeout(timeout);
   gif = new GIF(gifConfig);
+  gifBlob = null;
 }
 
 function getImgUrls(e, p) {
@@ -77,7 +75,7 @@ function animate() {
     gif.addFrame(canvas, { delay: 100, copy: true });
   }
 
-  timeout = setTimeout(animate, 80);
+  timeout = setTimeout(animate, 50);
 }
 
 function next() {
@@ -87,7 +85,7 @@ function next() {
   outIdx = ++outIdx % imgs.length;
   percent = 0;
 
-  setTimeout(animate, 500);
+  setTimeout(animate, 300);
 }
 
 function draw(img, opacity) {
@@ -97,18 +95,39 @@ function draw(img, opacity) {
   ctx.restore();
 }
 
+function update() {
+  currEmoji = form.querySelector('.select-emoji').value;
+  currPlatform = form.querySelector('.select-platform').value;
+  run(currEmoji, currPlatform);
+}
+
 function gifify() {
-  gif.render();
+  gifBtn.disabled = true;
+  gifBtn.innerHTML = 'Creating GIF...';
+  build();
 
-  gif.on('progress', function(p) {
-    gifPct.innerHTML = '(' + Math.round(p * 100) + '%)';
-  });
+  function build() {
+    if (!finished) { setTimeout(build, 1000); return; }
+    if (gifBlob) { save(); return; }
 
-  gif.on('finished', function(blob) {
-    console.log('done!');
+    gif.running = false;
+    gif.render();
 
-    saveAs(blob, currEmoji + '.gif');
-  });
+    gif.on('progress', function(p) {
+      gifBtn.innerHTML = 'Saving GIF... (' + Math.round(p * 100) + '%)';
+    });
+
+    gif.on('finished', function(blob) {
+      gifBlob = blob;
+      save();
+    });
+  }
+
+  function save() {
+    gifBtn.disabled = false;
+    gifBtn.innerHTML = 'Download GIF';
+    saveAs(gifBlob, currEmoji + '-emojwe.gif');
+  }
 }
 
 // kick things off
