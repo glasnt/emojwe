@@ -19,6 +19,9 @@
 .bold-extra { font-weight: 800; }
 .btn-primary { background-color: #00aaff; }
 .blue { color: #00aaff; }
+.aspect-ratio { height: 0; position: relative; }
+.aspect-ratio--1x1 { padding-bottom: 100%; }
+.aspect-ratio--object { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
 </style>
 </head>
 <body class='px2 py3 mx-auto container'>
@@ -84,7 +87,7 @@
         <option value="reversed-hand-with-middle-finger-extended">🖕 Reversed Hand With Middle Finger Extended</option>
         <option value="rowboat">🚣 Rowboat</option>
         <option value="runner">🏃 Runner</option>
-        <option value="sign-of-the-horns">🤘 Sign of the Horns</option>
+        <option value="sign-of-the-horns" selected>🤘 Sign of the Horns</option>
         <option value="sleuth-or-spy">🕵 Sleuth or Spy</option>
         <option value="surfer">🏄 Surfer</option>
         <option value="swimmer">🏊 Swimmer</option>
@@ -104,7 +107,7 @@
       <label class='block h6 bold caps label'>Platform</label>
       <select class='mb3 block col-12 select select-platform'>
         <option value='apple'>Apple</option>
-        <option value='google' selected>Google</option>
+        <option value='google'>Google</option>
         <option value='twitter'>Twitter</option>
       </select>
     </form>
@@ -121,14 +124,20 @@
 <section>
   <h3 class='mt4 mb2'>Examples</h3>
   <div class='mb3 clearfix mxn1'>
-    <div class='col col-4 px1 mb1'>
-      <img class='border rounded' src='img/misc/peace.gif'>
+    <div class='col col-4 px1'>
+      <div class='border rounded aspect-ratio aspect-ratio--1x1'>
+        <img class='p2 aspect-ratio--object' src='img/misc/waving-hand.gif'>
+      </div>
     </div>
-    <div class='col col-4 px1 mb1'>
-      <img class='border rounded' src='img/misc/peace.gif'>
+    <div class='col col-4 px1'>
+      <div class='border rounded aspect-ratio aspect-ratio--1x1'>
+        <img class='p2 aspect-ratio--object' src='img/misc/baby.gif'>
+      </div>
     </div>
-    <div class='col col-4 px1 mb1'>
-      <img class='border rounded' src='img/misc/peace.gif'>
+    <div class='col col-4 px1'>
+      <div class='border rounded aspect-ratio aspect-ratio--1x1'>
+        <img class='p2 aspect-ratio--object' src='img/misc/thumbs-up.gif'>
+      </div>
     </div>
   </div>
 </section>

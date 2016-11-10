@@ -7,8 +7,8 @@ var imgs, loaded, count, percent, finished, timeout;
 var outIdx = 0, inIdx = 1;
 var imgOrder = ['0', '3', '6', '4', '1-2', '5'];
 
-var currEmoji = 'baby';
-var currPlatform = 'google';
+var currEmoji = 'sign-of-the-horns';
+var currPlatform = 'apple';
 
 var gif, gifBlob, gifConfig = {
   repeat: 0,
@@ -71,7 +71,7 @@ function animate() {
   percent += 5;
 
   // add current canvas state as gif frame
-  if (!finished && percent % 20 === 0) {
+  if (!finished && percent % 10 === 0) {
     gif.addFrame(canvas, { delay: 100, copy: true });
   }
 
@@ -79,6 +79,7 @@ function animate() {
 }
 
 function next() {
+  if (!finished) gif.addFrame(canvas, { delay: 300, copy: true });
   if (++count == imgs.length) { finished = true; }
 
   inIdx = ++inIdx % imgs.length;
