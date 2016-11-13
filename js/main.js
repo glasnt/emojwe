@@ -19,7 +19,7 @@ var gif, gifBlob, gifConfig = {
 
 var form = document.querySelector('.emoji-options');
 var gifBtn = document.querySelector('.make-gif');
-var gifPct = document.querySelector('.gif-pct-done');
+var gifDone = document.querySelector('.gif-done');
 
 // event handlers
 /////////////////////////////
@@ -127,6 +127,7 @@ function gifify() {
   function save() {
     gifBtn.disabled = false;
     gifBtn.innerHTML = 'Download GIF';
+    gifDone.setAttribute('data-url', URL.createObjectURL(gifBlob));
     saveAs(gifBlob, currEmoji + '-emojwe.gif');
   }
 }
