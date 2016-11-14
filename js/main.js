@@ -17,6 +17,9 @@ var gif, gifBlob, gifConfig = {
   workerScript: 'js/vendor/gif.worker.js'
 };
 
+var fadeMs = 40
+var pauseMs = 300;
+
 var form = document.querySelector('.emoji-options');
 var gifBtn = document.querySelector('.make-gif');
 var gifDone = document.querySelector('.gif-done');
@@ -39,7 +42,7 @@ function run(emoji, platform) {
       if (loaded === urls.length) {
         canvas.width = canvas.height = (platform == 'apple' ? 160 : 240);
         ctx.drawImage(imgs[0], 0, 0);
-        animate();
+        setTimeout(animate, 200);
       }
     };
     img.src = urls[i];
@@ -64,29 +67,29 @@ function getImgUrls(e, p) {
 }
 
 function animate() {
-  if (percent >= 100) { next(); return; }
-
   draw(imgs[inIdx], percent / 100);
   draw(imgs[outIdx], (1 - percent / 100));
-  percent += 5;
+
+  if (percent >= 100) { next(); return; }
 
   // add current canvas state as gif frame
-  if (!finished && percent % 10 === 0) {
-    gif.addFrame(canvas, { delay: 100, copy: true });
+  if (!finished && percent % 5 === 0) {
+    gif.addFrame(canvas, { delay: fadeMs, copy: true });
   }
 
-  timeout = setTimeout(animate, 50);
+  percent += 5;
+  timeout = setTimeout(animate, fadeMs);
 }
 
 function next() {
-  if (!finished) gif.addFrame(canvas, { delay: 300, copy: true });
+  if (!finished) gif.addFrame(canvas, { delay: pauseMs, copy: true });
   if (++count == imgs.length) { finished = true; }
 
   inIdx = ++inIdx % imgs.length;
   outIdx = ++outIdx % imgs.length;
   percent = 0;
 
-  setTimeout(animate, 300);
+  setTimeout(animate, pauseMs);
 }
 
 function draw(img, opacity) {
@@ -128,7 +131,7 @@ function gifify() {
     gifBtn.disabled = false;
     gifBtn.innerHTML = 'Download GIF';
     gifDone.setAttribute('data-url', URL.createObjectURL(gifBlob));
-    saveAs(gifBlob, currEmoji + '-emojwe.gif');
+    saveAs(gifBlob, currPlatform + '_' + currEmoji + '.gif');
   }
 }
 
